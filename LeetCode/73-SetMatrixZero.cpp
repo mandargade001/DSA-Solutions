@@ -8,6 +8,9 @@ Approach:
    - T.C: O(M*N)
    - S.C: O(M+N)
 
+   To make it better, we can optimize space complexity to take O(1),
+   by using matrix to store the variables.
+
 */
 
 #include <bits/stdc++.h>
@@ -46,6 +49,44 @@ public:
         	cout<<endl;
         }
     }
+
+    void setZeroesOptimal(vector<vector<int>>& matrix) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+
+        int col0=-1;
+
+        for(int i=0;i<m;i++)
+        {
+        	for(int j=0;j<n;j++)
+        	{
+        		if(matrix[i][j]==0)
+        		{
+        			matrix[i][0]=0;
+        			if(j==0) col0=0;
+        			else matrix[0][j]=0;
+        		}
+        	}
+        }
+        for(int i=m-1;i>=0;i--)
+        {
+        	for(int j=n-1;j>=0;j--)
+        	{
+        		if(matrix[i][0]==0 || ((j==0 && col0==0) || matrix[0][j]==0))
+        		{
+        			matrix[i][j]=0;
+        		}
+        	}
+        }
+        for(int i=0;i<m;i++)
+        {
+        	for(int j=0;j<n;j++)
+        	{
+        		cout<<matrix[i][j]<<" ";
+        	}
+        	cout<<endl;
+        }
+    }
 };
 
 int main() {
@@ -58,7 +99,8 @@ int main() {
     	{1,3,1,5}
     };
     
-    sol.setZeroes(input);
+    // sol.setZeroes(input);
+    sol.setZeroesOptimal(input);
     
     return 0;
 }
