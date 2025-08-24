@@ -72,7 +72,7 @@ public:
         {
         	for(int j=n-1;j>=0;j--)
         	{
-        		if(matrix[i][0]==0 || ((j==0 && col0==0) || matrix[0][j]==0))
+        		if(matrix[i][0]==0 || (j==0 && col0==0) || (j!=0 && matrix[0][j]==0))
         		{
         			matrix[i][j]=0;
         		}
